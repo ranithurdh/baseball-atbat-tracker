@@ -52,8 +52,6 @@ const OUTCOME_COLORS = {
 };
 
 // --- Summary page mini spray-chart appearance ---
-// These only affect the small field diagrams printed on the Summary
-// page (MiniSprayChart) — every other view keeps its current look.
 const SUMMARY_FIELD_OPACITY = 0.25; // field diagram opacity, 0–1 (lower = lighter/fainter)
 const SUMMARY_PIN_RADIUS = 11; // hit-location dot radius in SVG units (elsewhere it's 6.5)
 const SUMMARY_PIN_FONT_SIZE = 13; // at-bat number printed inside the dot (elsewhere it's 7.5)
@@ -63,11 +61,6 @@ const STORAGE_KEYS = { TEAMS: 'teams', ATBATS: 'atbats' };
 /* ============================================================
    STORAGE
    ============================================================ */
-// CHANGE THIS to wherever your backend actually runs —
-// http://localhost:5000/api for local dev, or your deployed backend's
-// URL (e.g. https://your-app.onrender.com/api) once you host it.
-
-// Vite exposes any env var prefixed with VITE_ to the browser
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 async function loadJSON(key, fallback) {
