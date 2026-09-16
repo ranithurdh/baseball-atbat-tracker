@@ -54,9 +54,9 @@ const OUTCOME_COLORS = {
 // --- Summary page mini spray-chart appearance ---
 // These only affect the small field diagrams printed on the Summary
 // page (MiniSprayChart) — every other view keeps its current look.
-const SUMMARY_FIELD_OPACITY = 0.35; // field diagram opacity, 0–1 (lower = lighter/fainter)
-const SUMMARY_PIN_RADIUS = 9; // hit-location dot radius in SVG units (elsewhere it's 6.5)
-const SUMMARY_PIN_FONT_SIZE = 10; // at-bat number printed inside the dot (elsewhere it's 7.5)
+const SUMMARY_FIELD_OPACITY = 0.25; // field diagram opacity, 0–1 (lower = lighter/fainter)
+const SUMMARY_PIN_RADIUS = 11; // hit-location dot radius in SVG units (elsewhere it's 6.5)
+const SUMMARY_PIN_FONT_SIZE = 13; // at-bat number printed inside the dot (elsewhere it's 7.5)
 
 const STORAGE_KEYS = { TEAMS: 'teams', ATBATS: 'atbats' };
 
