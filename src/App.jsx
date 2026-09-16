@@ -340,9 +340,10 @@ function GlobalStyles() {
       .summary-section { margin-bottom:32px; }
       .summary-table { width:100%; border-collapse:collapse; table-layout:fixed; }
       .summary-table th { text-align:left; font-size:12px; font-weight:600; color:${COLORS.inkFaint}; padding:6px 8px; border-bottom:2px solid ${COLORS.ink}; }
-      .summary-table td { vertical-align:top; padding:10px 8px; border-bottom:1px solid ${COLORS.border}; font-size:12.5px; color:${COLORS.ink}; }
-      .summary-atbat-list { margin:0; padding:0; list-style:none; }
-      .summary-season-label { font-size:11px; font-weight:600; color:${COLORS.inkFaint}; margin-top:6px; }
+      .summary-table td { vertical-align:top; padding:8px 8px; border-bottom:1px solid ${COLORS.border}; font-size:12.5px; color:${COLORS.ink}; }
+      .summary-atbat-list { margin:0; padding:0; list-style:none; display:grid; grid-template-columns:1fr 1fr; column-gap:8px; }
+      .summary-atbat-item { font-size:10px; line-height:1.3; }
+      .summary-season-label { font-size:10px; font-weight:600; color:${COLORS.inkFaint}; margin-top:4px; }
       .summary-season-label:first-child { margin-top:0; }
       .summary-legend { font-size:12px; color:${COLORS.inkFaint}; line-height:1.5; }
 
@@ -1442,12 +1443,15 @@ function AtBatInfoCell({ records }) {
             {[...bySeason[s]]
               .sort((a, b) => a.atBatNumber - b.atBatNumber)
               .map((r) => (
-                <li key={r.id} className="flex items-start gap-1.5 py-0.5">
+                <li
+                  key={r.id}
+                  className="summary-atbat-item flex items-start gap-1 py-0.5"
+                >
                   <span
                     className="inline-block rounded-full shrink-0"
                     style={{
-                      width: 7,
-                      height: 7,
+                      width: 6,
+                      height: 6,
                       marginTop: 3,
                       background: OUTCOME_COLORS[r.outcome],
                     }}
@@ -1554,17 +1558,15 @@ function SummaryView({ teams, atbats }) {
               <div className="overflow-x-auto">
                 <table className="summary-table">
                   <colgroup>
-                    <col style={{ width: '9%' }} />
-                    <col style={{ width: '17%' }} />
+                    <col style={{ width: '24%' }} />
                     <col style={{ width: '20%' }} />
                     <col style={{ width: '20%' }} />
                     <col style={{ width: '20%' }} />
-                    <col style={{ width: '14%' }} />
+                    <col style={{ width: '16%' }} />
                   </colgroup>
                   <thead>
                     <tr>
                       <th>Player</th>
-                      <th>At-bat info</th>
                       <th>Season 1</th>
                       <th>Season 2</th>
                       <th>Tournament</th>
@@ -1582,8 +1584,8 @@ function SummaryView({ teams, atbats }) {
                       );
                       return (
                         <tr key={player}>
-                          <td className="font-medium">{player}</td>
                           <td>
+                            <div className="font-medium mb-1">{player}</div>
                             <AtBatInfoCell records={allRecords} />
                           </td>
                           <td>
