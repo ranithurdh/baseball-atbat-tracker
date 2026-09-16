@@ -51,6 +51,13 @@ const OUTCOME_COLORS = {
   'Base on Balls': COLORS.walk,
 };
 
+// --- Summary page mini spray-chart appearance ---
+// These only affect the small field diagrams printed on the Summary
+// page (MiniSprayChart) — every other view keeps its current look.
+const SUMMARY_FIELD_OPACITY = 0.35; // field diagram opacity, 0–1 (lower = lighter/fainter)
+const SUMMARY_PIN_RADIUS = 9; // hit-location dot radius in SVG units (elsewhere it's 6.5)
+const SUMMARY_PIN_FONT_SIZE = 10; // at-bat number printed inside the dot (elsewhere it's 7.5)
+
 const STORAGE_KEYS = { TEAMS: 'teams', ATBATS: 'atbats' };
 
 /* ============================================================
@@ -166,7 +173,7 @@ const FIELD_SVG_MARKUP = `
 </g></svg>
 `;
 
-function BaseballField({ pins, onFieldClick, interactive = true }) {
+function BaseballField({ pins, onFieldClick, interactive = true, opacity }) {
   const hostRef = useRef(null);
   const overlayRef = useRef(null);
   const [viewBox, setViewBox] = useState('0 0 500 500');
@@ -200,6 +207,7 @@ function BaseballField({ pins, onFieldClick, interactive = true }) {
       <div
         ref={hostRef}
         className="field-svg-host w-full"
+        style={opacity != null ? { opacity } : undefined}
         dangerouslySetInnerHTML={{ __html: FIELD_SVG_MARKUP }}
       />
       <svg
@@ -256,9 +264,13 @@ function TrajectoryMark({
   showNumber = true,
   tooltip,
   pulsing = false,
+  radius = 6.5,
+  fontSize = 7.5,
 }) {
   const pathD = trajectoryPathD(home, location, hitType);
   const dotted = hitType === 'Grounder';
+  // keep the little chalk center-dot in proportion as the pin grows
+  const innerDotRadius = (1.5 / 6.5) * radius;
 
   return (
     <g>
@@ -274,18 +286,18 @@ function TrajectoryMark({
         <circle
           cx={location.x}
           cy={location.y}
-          r={6.5}
+          r={radius}
           fill="none"
           stroke={color}
           strokeWidth={2}
           className="pin-pulse"
         />
       )}
-      <circle cx={location.x} cy={location.y} r={1.5} fill={COLORS.chalk} />
+      <circle cx={location.x} cy={location.y} r={innerDotRadius} fill={COLORS.chalk} />
       <circle
         cx={location.x}
         cy={location.y}
-        r={6.5}
+        r={radius}
         fill={color}
         stroke={COLORS.chalk}
         strokeWidth={1}
@@ -297,7 +309,7 @@ function TrajectoryMark({
           textAnchor="middle"
           dominantBaseline="central"
           className="font-display"
-          fontSize={7.5}
+          fontSize={fontSize}
           fontWeight={700}
           fill={COLORS.chalk}
           style={{ pointerEvents: 'none' }}
@@ -1483,11 +1495,17 @@ function MiniSprayChart({ records = [] }) {
         color={OUTCOME_COLORS[a.outcome]}
         number={a.atBatNumber}
         tooltip={`AB #${a.atBatNumber} · Season ${a.season} · ${a.balls}-${a.strikes} · ${a.hitType} · ${a.outcome}`}
+        radius={SUMMARY_PIN_RADIUS}
+        fontSize={SUMMARY_PIN_FONT_SIZE}
       />
     ));
   return (
     <div style={{ maxWidth: 170, margin: '0 auto' }}>
-      <BaseballField pins={pins} interactive={false} />
+      <BaseballField
+        pins={pins}
+        interactive={false}
+        opacity={SUMMARY_FIELD_OPACITY}
+      />
     </div>
   );
 }
