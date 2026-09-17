@@ -59,8 +59,8 @@ const SUMMARY_PIN_FONT_SIZE = 13; // at-bat number printed inside the dot (elsew
 // Summary table column widths (%). The 3 spray-chart columns (Season 1/2,
 // Tournament) split the remainder evenly, so keep ATBATINFO + NOTES + 60 = 100
 // if you want the table to fill the page edge-to-edge without gaps.
-const SUMMARY_ATBATINFO_COL_WIDTH = 25; // Player / at-bat-list column
-const SUMMARY_NOTES_COL_WIDTH = 15; // Notes column
+const SUMMARY_ATBATINFO_COL_WIDTH = 25.5; // Player / at-bat-list column
+const SUMMARY_NOTES_COL_WIDTH = 14.5; // Notes column
 
 const STORAGE_KEYS = { TEAMS: 'teams', ATBATS: 'atbats' };
 
