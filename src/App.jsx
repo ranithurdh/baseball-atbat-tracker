@@ -56,6 +56,12 @@ const SUMMARY_FIELD_OPACITY = 0.25; // field diagram opacity, 0–1 (lower = lig
 const SUMMARY_PIN_RADIUS = 11; // hit-location dot radius in SVG units (elsewhere it's 6.5)
 const SUMMARY_PIN_FONT_SIZE = 13; // at-bat number printed inside the dot (elsewhere it's 7.5)
 
+// Summary table column widths (%). The 3 spray-chart columns (Season 1/2,
+// Tournament) split the remainder evenly, so keep ATBATINFO + NOTES + 60 = 100
+// if you want the table to fill the page edge-to-edge without gaps.
+const SUMMARY_ATBATINFO_COL_WIDTH = 30; // Player / at-bat-list column
+const SUMMARY_NOTES_COL_WIDTH = 10; // Notes column
+
 const STORAGE_KEYS = { TEAMS: 'teams', ATBATS: 'atbats' };
 
 /* ============================================================
@@ -1583,11 +1589,11 @@ function SummaryView({ teams, atbats }) {
               <div className="overflow-x-auto">
                 <table className="summary-table">
                   <colgroup>
-                    <col style={{ width: '30%' }} />
+                    <col style={{ width: `${SUMMARY_ATBATINFO_COL_WIDTH}%` }} />
                     <col style={{ width: '20%' }} />
                     <col style={{ width: '20%' }} />
                     <col style={{ width: '20%' }} />
-                    <col style={{ width: '10%' }} />
+                    <col style={{ width: `${SUMMARY_NOTES_COL_WIDTH}%` }} />
                   </colgroup>
                   <thead>
                     <tr>
