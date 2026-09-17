@@ -350,6 +350,7 @@ function GlobalStyles() {
       .summary-atbat-item { font-size:10px; line-height:1.3; }
       .summary-season-label { font-size:10px; font-weight:600; color:${COLORS.inkFaint}; margin-top:4px; }
       .summary-season-label:first-child { margin-top:0; }
+      .summary-player-stats { font-size:10px; font-weight:600; color:${COLORS.inkFaint}; white-space:nowrap; }
       .summary-legend { font-size:12px; color:${COLORS.inkFaint}; line-height:1.5; }
 
       @media print {
@@ -1503,6 +1504,19 @@ function MiniSprayChart({ records = [] }) {
   );
 }
 
+function PlayerStatLine({ records }) {
+  const ab = records.length;
+  const hits = records.filter((a) => a.outcome === 'Hit').length;
+  const strikeouts = records.filter((a) => a.hitType === 'Strikeout').length;
+  const walks = records.filter((a) => a.outcome === 'Base on Balls').length;
+
+  return (
+    <span className="summary-player-stats">
+      {ab}AB · {hits}H · {strikeouts}K · {walks}BB
+    </span>
+  );
+}
+
 function SummaryView({ teams, atbats }) {
   const teamNames = Object.keys(teams);
   const [selectedTeam, setSelectedTeam] = useState('');
@@ -1596,7 +1610,10 @@ function SummaryView({ teams, atbats }) {
                       return (
                         <tr key={player}>
                           <td>
-                            <div className="font-medium mb-1">{player}</div>
+                            <div className="flex items-baseline flex-wrap gap-x-2 mb-1">
+                              <span className="font-medium">{player}</span>
+                              <PlayerStatLine records={allRecords} />
+                            </div>
                             <AtBatInfoCell records={allRecords} />
                           </td>
                           <td>
