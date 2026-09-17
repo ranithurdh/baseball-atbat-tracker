@@ -53,8 +53,8 @@ const OUTCOME_COLORS = {
 
 // --- Summary page mini spray-chart appearance ---
 const SUMMARY_FIELD_OPACITY = 0.25; // field diagram opacity, 0–1 (lower = lighter/fainter)
-const SUMMARY_PIN_RADIUS = 11; // hit-location dot radius in SVG units (elsewhere it's 6.5)
-const SUMMARY_PIN_FONT_SIZE = 13; // at-bat number printed inside the dot (elsewhere it's 7.5)
+const SUMMARY_PIN_RADIUS = 12; // hit-location dot radius in SVG units (elsewhere it's 6.5)
+const SUMMARY_PIN_FONT_SIZE = 14; // at-bat number printed inside the dot (elsewhere it's 7.5)
 
 // Summary table column widths (%). The 3 spray-chart columns (Season 1/2,
 // Tournament) split the remainder evenly, so keep ATBATINFO + NOTES + 60 = 100
