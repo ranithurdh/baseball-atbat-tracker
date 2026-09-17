@@ -1583,11 +1583,11 @@ function SummaryView({ teams, atbats }) {
               <div className="overflow-x-auto">
                 <table className="summary-table">
                   <colgroup>
-                    <col style={{ width: '24%' }} />
+                    <col style={{ width: '30%' }} />
                     <col style={{ width: '20%' }} />
                     <col style={{ width: '20%' }} />
                     <col style={{ width: '20%' }} />
-                    <col style={{ width: '16%' }} />
+                    <col style={{ width: '10%' }} />
                   </colgroup>
                   <thead>
                     <tr>
